@@ -1,53 +1,35 @@
 'use strict'
 
+const has = require('lodash.has')
+const get = require('lodash.get')
+const set = require('lodash.set')
 const path = require('path')
-const dotenv = require('dotenv')
 
-class Env {
-  constructor (path) {
-    dotenv.load({
-      silent: process.env.ENV_SILENT || false,
-      path: this.path(path || process.env.ENV_PATH)
+class Config {
+  constructor (dirname) {
+    this.items = require('require-all')({
+      recursive: false,
+      filters: /(.*)\.js$/,
+      dirname: path.resolve(path),
+      excludeDirs :  /^\.(git|svn)$/,
     })
   }
 
-  path (path) {
-    return this.isEmpty(path) ? '.env' : path;
+  all () {
+    return this.items
   }
 
-  isEmpty (value) {
-    return (value && value.length !== 0)
-  }
-
-  isTruthy (value) {
-    return (value === 'true' || value === '1')
-  }
-
-  isFalsey (value) {
-    return (value === 'false' || value === '0')
-  }
-
-  hasValue (x) {
-    return (x !== undefined && x !== null )
-  }
-
-  boolify (value) {
-    return this.isTruthy(value) ? true : this.isFalsey(value) ? false : value
-  }
-
-  exists (key) {
-    return this.hasValue(process.env[key])
+  has (key) {
+    return has(this.items, key)
   }
 
   get (key, dflt) {
-    return this.boolify(
-      process.env[key] || (this.hasValue(dflt) ? dflt : null)
-    )
+    return get(this.items, key, dflt)
   }
 
   set (key, value) {
-    process.env[key] = value
+    return set(this.items, key)
   }
 }
 
-module.exports = Env
+module.exports = Config

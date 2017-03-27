@@ -1,5 +1,5 @@
 {
-  "name": "@seed-media/env",
+  "name": "@seed-media/config",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.js",
@@ -8,15 +8,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/seed-media/env.git"
+    "url": "git+https://github.com/seed-media/config.git"
   },
   "author": "Ben Swinburne",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/seed-media/env/issues"
+    "url": "https://github.com/seed-media/config/issues"
   },
-  "homepage": "https://github.com/seed-media/env",
+  "homepage": "https://github.com/seed-media/config",
   "dependencies": {
-    "dotenv": "^4.0.0"
+    "lodash.get": "^4.4.2",
+    "lodash.has": "^4.5.2",
+    "lodash.set": "^4.3.2",
+    "require-all": "^2.2.0"
   }
 }
