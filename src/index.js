@@ -10,8 +10,8 @@ class Config {
     this.items = require('require-all')({
       recursive: false,
       filters: /(.*)\.js$/,
-      dirname: path.resolve(path),
-      excludeDirs :  /^\.(git|svn)$/,
+      dirname: path.resolve(dirname),
+      excludeDirs :  /^\.(git|svn)$/
     })
   }
 
